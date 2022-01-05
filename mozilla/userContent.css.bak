@@ -1,0 +1,2 @@
+@-moz-document url-prefix(about:blank) {*{background-color:#0c1014;}}
+@-moz-document url("about:newtab") {body{background-color:#0c1014!important;}}

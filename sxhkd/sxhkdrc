@@ -1,0 +1,334 @@
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-  #
+#                                                                              #
+#                      Simple X HotKey Daemon config file                      #
+#                                                                              #
+# -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-  #
+
+
+# Never bind "control + alt + g" to anything,
+#+this is used to grab focus on QEMU.
+
+
+# make sxhkd clear all preselections and receptacles from bspwm then reload
+#+its own configuration files.
+# The {} brackets must be \ escaped as they are interpruted by sxhkd.
+super + Escape
+	for win in $(bspc query -N -n .leaf.!window); \
+	do bspc node $win -k ; done ; \
+	bspc query -N | xargs -I '\{\}' bspc node \{\} -p cancel ; \
+	pkill -USR1 -x sxhkd
+
+
+# ---------------------------------------------------------------------------- #
+#                            wm independent hotkeys                            #
+# ---------------------------------------------------------------------------- #
+
+# Terminal emulator
+super + {_,shift + }Return
+	urxvt {-g 127x31 -e tmux,_}
+
+# Create custom sized terminal by dragging box.
+super + control + Return
+	/home/jager/Documents/Code/Bash/DrawingTerminals_by-f0x52
+button9
+	/home/jager/Documents/Code/Bash/DrawingTerminals_by-f0x52
+
+# Quake style terminal.
+control + Escape
+	~/Documents/Code/Bash/urxvtq
+
+# ROFI program launcher
+super + {space,grave,alt + Return}
+	/home/jager/Documents/Code/Bash/rofi_dialog {run,window,ssh}
+
+# nvim_anywhere script.
+super + {_,shift + }v
+	/home/jager/Documents/Code/Bash/nvim_anywhere{_, 1}
+
+# Toggle Dvorak/QWERTY layout.
+super + shift + space
+	/home/jager/Documents/Code/Bash/toggle_keyboard_layout 'Super + Shift + Space'
+
+# Toggle stalonetray
+super + semicolon
+	/home/jager/Documents/Code/Bash/toggle_stalonetray
+
+# Lock and logout hotkeys
+# quit bspwm normally
+super + alt + shift + Escape
+	bspc quit
+
+# Lock the screen
+super + alt + Escape
+	/home/jager/Documents/Code/Bash/i3lock_script
+	#i3lock -u -c 000000
+	#i3lock -u -i ~/Pictures/Wallpapers/WallpaperSymlinks/LockScreenImage
+# Use DM tool to lock usually, but we have i3lock so let's use that.
+#	dm-tool lock
+
+# ---------------------------------------------------------------------------- #
+# bspwm hotkeys
+# ---------------------------------------------------------------------------- #
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
+super + y
+	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest.local
+
+# ---------------------------------------------------------------------------- #
+# state/flags
+# ---------------------------------------------------------------------------- #
+
+# set the window state
+super + {t,shift + t,shift + f,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+#super + ctrl + {x,y,z}
+#	bspc node -g {locked,sticky,private}
+
+# Toggle window stickyness.
+super + a
+	bspc node -g sticky
+
+# ---------------------------------------------------------------------------- #
+# focus/swap
+# ---------------------------------------------------------------------------- #
+
+
+# For some reason I can't get BSPWM to move a node to a monitor in the direction
+# that an empty node is in when it fails to switch with that node, so currently
+# I can't push nodes in directions between windows without a separate keybind
+# unless that monitor is already populated. I also can't get BSPWM to follow a
+# node onto another monitor when I push it towards a populated monitor.
+
+# focus node in the given direction
+super + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+## move node in the given direction, supports multiple monitors
+#super + shift + {h,j,k,l}
+	#if ! $(bspc node -s {west,south,north,east} --follow); \
+	#then bspc node -m {west,south,north,east} --follow; fi
+
+## move node in the given direction, supports multiple monitors
+## These are separate due to the way that SXHKD parses {} brackets.
+## move node west
+#super + shift + h
+	#if ! $(bspc node -s west --follow); \
+	#then bspc node -m west --follow; fi
+## move node south
+#super + shift + j
+	#if ! $(bspc node -s south --follow); \
+	#then bspc node -m south --follow; fi
+## move node north
+#super + shift + k
+	#if ! $(bspc node -s north --follow); \
+	#then bspc node -m north --follow; fi
+## move node east
+#super + shift + l
+	#if ! $(bspc node -s east --follow); \
+	#then bspc node -m east --follow; fi
+
+# move node west
+super + shift + h
+	if [[ "$(bspc query -M -n west)" == "$(bspc query -M -m)" ]]; \
+	then bspc node -s west --follow; \
+	else bspc node -m west --follow; fi
+# move node south
+super + shift + j
+	if [[ "$(bspc query -M -n south)" == "$(bspc query -M -m)" ]]; \
+	then bspc node -s south --follow; \
+	else bspc node -m south --follow; fi
+# move node north
+super + shift + k
+	if [[ "$(bspc query -M -n north)" == "$(bspc query -M -m)" ]]; \
+	then bspc node -s north --follow; \
+	else bspc node -m north --follow; fi
+# move node east
+super + shift + l
+	if [[ "$(bspc query -M -n east)" == "$(bspc query -M -m)" ]]; \
+	then bspc node -s east --follow; \
+	else bspc node -m east --follow; fi
+
+# focus/move node to monitor in direciton
+super + alt + {_,shift + }{h,j,k,l}
+	bspc {monitor -f, node -m} {west,south,north,east}
+
+# focus/move node to next monitor
+super + alt + {_,shift + }Tab
+	bspc {monitor -f,node -m} prev --follow
+
+# focus/move window to monitor #
+super + alt + {_,shift + }{1-9,0}
+	bspc {monitor -f,node -m} ^{1-9,0} --follow
+
+# focus the node for the given path jump
+# Parent/sibling(brother)
+super + {_,shift + }{p,s,backslash,slash}
+	bspc node -{f,s} @{parent,brother,first,second}
+
+# focus or send the next/previous desktop
+super + {_,shift + }bracket{left,right}
+	bspc {desktop -f,node -d} {prev,next}
+
+# focus or send to the last desktop
+#super + {Tab,grave}
+#	bspc {node,desktop} -f last
+super + {_,shift + }Tab
+	bspc {desktop -f,node -d} last.occupied.local
+
+# focus the next/previous node
+#super + {_,shift + }c
+#	bspc node -f {next,prev}
+
+# Cycle through local nodes.
+alt + {_,shift + }Tab
+	bspc node -f {next,prev}.local.leaf
+
+# Rotate windows in the currently selected branch.
+super + {_,shift + } r
+	bspc node {-R 90,-C forward}
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+# Mutihead scalable
+	bspc {desktop -f,node -d} "$(bspc query -D -m | sed -n {1-9,10}p)"
+# Original
+#	bspc {desktop -f,node -d} ^{1-9,10}
+# Multihead hack
+#	bspc {desktop -f,node -d} ^$(expr $([[ $(bspc query -M -m) != 'LVDS' ]] && \
+#	echo 10 || echo 0) + {1-9,10})
+
+# Layer selection.
+super + shift + {underscore,BackSpace,plus}
+	bspc node -l {below,normal,above}
+
+# ---------------------------------------------------------------------------- #
+# preselect
+# ---------------------------------------------------------------------------- #
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+# ---------------------------------------------------------------------------- #
+# resize tiled/floating
+# ---------------------------------------------------------------------------- #
+
+# expand the tiled space in the given direction
+super + alt + {Left,Down,Up,Right}
+	bspc node -z {left -10 0,bottom 0 +10,top 0 -10,right +10 0}
+
+# contract the tiled space in the given direction
+super + alt + shift + {Left,Down,Up,Right}
+	bspc node -z {left +10 0,bottom 0 -10,top 0 +10,right -10 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	xdotool getactivewindow windowmove --relative %1 {-20 y,x 20,x -20,20 y}
+
+super + {_,shift + }b
+	bspc node $(bspc query -N -n | sed -n "1p") -{B,E}
+
+# ---------------------------------------------------------------------------- #
+# pointer focus/move/resize
+# ---------------------------------------------------------------------------- #
+# Seems not to work in new bspwm versions.
+
+# focus
+#~button1
+#	bspc pointer -g focus
+
+# start move/resize
+#super + button{1-3}
+#	; bspc pointer -g {move,resize_side,resize_corner}
+
+# start move/resize
+#super + shift + button1
+#	; bspc pointer -g resize_corner
+
+# end move/resize
+#super + @button{1-3}
+#	bspc pointer -u
+
+
+# ---------------------------------------------------------------------------- #
+# BACKLIGHT & MEDIA
+# PREFIX: XF86
+# ---------------------------------------------------------------------------- #
+
+# Managed by power manager.
+#XF86MonBrightnessDown
+
+# Managed by power manager.
+#XF86MonBrightnessUp
+
+# Handle muting the audio.
+XF86AudioMute
+	~/Documents/Code/Bash/toggle_mute
+	#amixer -D pulse sset Master toggle
+# Turn mute button into a play/pause button when shift is held.
+shift + XF86AudioMute
+	mpc toggle
+
+# Handle volume controls.
+XF86Audio{Lower,Raise}Volume
+	amixer -D pulse sset Master 2%{-,+}
+# Turn volume buttons into media keys when shift is held.
+shift + XF86Audio{Lower,Raise}Volume
+	mpc {prev,next}
+# Handle Prev/Play/Next buttons.
+XF86Audio{Prev,Play,Next}
+	mpc {prev,toggle,next}
+
+# Holdover from Macbook Pro
+# XF86Display is used in the focus/swap section above.
+# Enable/Disable DVI-0 Monitor to the right of LVDS (Built in monitor)
+super + XF86Display
+	/home/jager/Documents/Code/Bash/monitor_enable DVI-0 right-of 0
+
+# Backlight control file: /sys/class/backlight/apple_backlight/brightness
+# Possible control file: /sys/class/leds/smc\:\:kbd_backlight/brightness
+#super + XF86KbdLightOnOff
+super + F8
+	/home/jager/.config/bspwm/restart_compton
+
+# Used by power manager
+#XF86KbdBrightnessDown
+
+# Used by power manager
+#XF86KbdBrightnessUp
+
+# Defaults to the DVD drive.
+XF86Eject
+	eject

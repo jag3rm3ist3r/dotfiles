@@ -1,0 +1,54 @@
+" Pathogen
+execute pathogen#infect()
+
+" Tell vim-latex-live-preview to use mupdf
+" let g:livepreview_previewer = 'mupdf'
+let g:livepreview_previewer = 'mupdf.inotify'
+
+" Enable setting title
+set title
+" Set vim's title
+set titlestring=vim:\ %-25.55F\ %a%r%m titlelen=70
+
+" Highlight all instances of word under cursor, when idle.
+" Useful when studying strange source code.
+" Type z/ to toggle highlighting on/off.
+nnoremap z/ :if AutoHighlightToggle()<Bar>set hls<Bar>endif<CR>
+function! AutoHighlightToggle()
+  let @/ = ''
+  if exists('#auto_highlight')
+    au! auto_highlight
+    augroup! auto_highlight
+    setl updatetime=4000
+    echo 'Highlight current word: off'
+    return 0
+  else
+    augroup auto_highlight
+      au!
+      au CursorHold * let @/ = '\V\<'.escape(expand('<cword>'), '\').'\>'
+    augroup end
+    setl updatetime=500
+    echo 'Highlight current word: ON'
+    return 1
+  endif
+endfunction
+
+"! Using plug
+"Plug 'dylanaraps/wal.vim'
+"
+"colorscheme wal
+colorscheme elflord
+
+syntax on
+set number
+"set cursorline
+"highlight CursorLine cterm=NONE ctermbg=NONE ctermfg=NONE guibg=NONE guifg=NONE
+highlight Visual ctermbg=green ctermfg=black
+highlight Search ctermbg=blue ctermfg=black
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set noexpandtab
+

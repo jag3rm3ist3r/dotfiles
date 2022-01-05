@@ -1,0 +1,291 @@
+!.Xresources
+
+Xft.dpi:                        72
+URxvt*termName:                 rxvt-256color
+!URxvt*font:                     xft:Terminus (TTF):style=Medium:pixelsize=12
+!URxvt*font:                     xft:Hack:style=Medium:pixelsize=10
+URxvt*font:                     xft:SourceCodePro:style=Medium:pixelsize=11
+URxvt.depth:                    32
+!!Doesn't work in vim or after I exit vim for some reason
+!URxvt.cursorBlink:              true
+URxvt*lineSpace:                1
+URxvt.letterSpace:              0
+URxvt.iso14755:                 false
+URxvt.iso14755_52:              false
+URxvt*geometry:                 80x20
+URxvt.scrollBar:                false
+URxvt*loginShell:               true
+URxvt.internalBorder:           35
+URxvt.perl-ext-common:          default,selection,selection-autotransform,selection-popup,selection-to-clipboard
+URxvt.clipboard.autocopy:		true
+!URxvt.keysym.M-c:				perl:clipboard:copy
+!URxvt.keysym.M-v:				perl:clipboard:paste
+!URxvt.keysym.M-C-v:				perl:clipboard:paste_escaped
+!URxvt.clipboard.copycmd:		xclip -i -selection clipboard
+!URxvt.clipboard.pastecmd:		xclip -o -selection clipboard
+URxvt.perl-lib:                 /usr/local/lib/urxvt/perl/
+
+
+
+!!general
+!*.foreground: #b8f1ee
+!*.background: [80]#0a0f14
+!*.cursorColor: #ee1111
+!
+!!black
+!*.color0: #0a0f14
+!*.color8: #10151b
+!
+!!red
+!*color1: #aa0e50
+!*color9: #be0e50
+!
+!!green
+!*color2: #1dcc9f
+!*color10: #1fd9a9
+!
+!!yellow
+!*.color3: #edb54b
+!*.color11: #245361
+!
+!!blue
+!*.color4: #195465
+!*.color12: #093748
+!
+!!magenta
+!*.color5: #783e57
+!*.color13: #888ba5
+!
+!!cyan
+!*.color6: #33859d
+!*.color14: #599caa
+!
+!!white
+!*.color7: #98d1ce
+!*.color15: #d3ebe9
+
+
+! URxvt*rxvt-unicode (urxvt) v9.21 - released: 2014-12-31
+! URxvt*options: perl,xft,styles,combining,blink,iso14755,unicode3,encodings=eu+vn+jp+jp-ext+kr+zh+zh-ext,fade,transparent,tint,XIM,frills,selectionscrolling,wheel,slipwheel,cursorBlink,pointerBlank,scrollbars=plain+rxvt+NeXT+xterm
+! URxvt*Usage: urxvt [options] [-e command args]
+! URxvt*termName:                       string
+! URxvt*geometry:                       geometry
+! URxvt*chdir:                          string
+! URxvt*reverseVideo:                   boolean
+! URxvt*loginShell:                     boolean
+! URxvt*multiClickTime:                 number
+! URxvt*jumpScroll:                     boolean
+! URxvt*skipScroll:                     boolean
+! URxvt*pastableTabs:                   boolean
+! URxvt*scrollstyle:                    plain
+!! URxvt*scrollBar:                      false
+! URxvt*scrollBar_right:                boolean
+! URxvt*scrollBar_floating:             boolean
+! URxvt*scrollBar_align:                mode
+! URxvt*thickness:                      number
+! URxvt*scrollTtyOutput:                boolean
+! URxvt*scrollTtyKeypress:              boolean
+! URxvt*scrollWithBuffer:               boolean
+! URxvt*inheritPixmap:                  boolean
+! URxvt*transparent:                    true
+! URxvt*tintColor:                      #3E3E3E
+! URxvt*shading:                        55 
+! URxvt*blurRadius:                     8x8
+! URxvt*fading:                         1000
+! URxvt*fadeColor:                      black
+! URxvt*utmpInhibit:                    boolean
+! URxvt*urgentOnBell:                   boolean
+! URxvt*visualBell:                     boolean
+! URxvt*mapAlert:                       boolean
+! URxvt*meta8:                          boolean
+! URxvt*mouseWheelScrollPage:           boolean
+! URxvt*tripleclickwords:               boolean
+! URxvt*insecure:                       boolean
+! URxvt*cursorUnderline:                boolean
+! URxvt*cursorBlink:                    boolean
+! URxvt*pointerBlank:                   boolean
+
+! --- base16 colors ---
+
+#define base00 #4d493e
+#define base01 #2C2C2C
+#define base02 #3C3C3C
+#define base03 #5C5C5C
+#define base04 #8C8C8C
+#define base05 #ACACAC
+#define base06 #DCDCDC
+#define base07 #d1cbb3
+#define base08 #901C1C
+#define base09 #dc9656
+#define base0A #fbce76
+#define base0B #a1b56c
+#define base0C #71a7f0
+#define base0D #85c9c0
+#define base0E #d496d2
+#define base0F #A16946
+
+! --- colors ---
+*.background: [80]#d1cbb3
+*.foreground: base00
+*.cursorColor:  base00
+
+!! Black
+!*.color0:       base00
+!! Red
+!*.color1:       base08
+!! Green
+!*.color2:       base0B
+!! Yellow
+!*.color3:       base0A
+!! Blue
+!*.color4:       base0C
+!! Magenta
+!*.color5:       base0E
+!! Cyan
+!*.color6:       base0D
+!! White
+!*.color7:       base05
+!
+!! Bright black
+!*.color8:       base03
+!! Bright red
+!*.color9:       base08
+!! Bright green
+!*.color10:      base0B
+!! Bright yellow
+!*.color11:      base0A
+!! Bright blue
+!*.color12:      base0C
+!! Bright magenta
+!*.color13:      base0E
+!! Bright cyan
+!*.color14:      base0D
+!! Bright white
+!*.color15:      base07
+
+*.color0:  #635251
+*.color8:  #503e43
+
+*.color1:  #f13459
+*.color9:  #c31e52
+ 
+*.color2:  #a55e8b
+*.color10: #884597
+ 
+*.color3:  #fabb5c
+*.color11: #d65f4a
+ 
+*.color4:  #2c7dcf
+*.color12: #285ab8
+ 
+*.color5:  #faddc5
+*.color13: #fa9584
+ 
+*.color6:  #fa436e
+*.color14: #a12756
+ 
+*.color7:  #a89984
+*.color15: #faddc5
+
+! Browns
+! *.color17:      base09
+! *.color18:      base0F
+
+! Grays
+! *.color19:      base02
+! *.color20:      base04
+! *.color21:      base06
+
+! --- markup colors ---
+!! URxvt*colorBD:                        base05
+!! URxvt*colorIT:                        base05
+!! URxvt*colorUL:                        base05
+! URxvt*colorRV:                        color
+!! URxvt*underlineColor:                 base05
+! URxvt*scrollColor:                    color
+! URxvt*troughColor:                    color
+!! URxvt*highlightColor:                 base05
+!! URxvt*highlightTextColor:             base00
+! URxvt*cursorColor2:                   color
+! URxvt*pointerColor:                   color
+! URxvt*pointerColor2:                  color
+! URxvt*borderColor:                    color
+! URxvt*iconFile:                       file
+! URxvt*font:                           xft:Inconsolata:Regular:size=10, \
+! URxvt*boldFont:                       fontname
+! URxvt*italicFont:                     fontname
+! URxvt*boldItalicFont:                 fontname
+! URxvt*intensityStyles:                boolean
+! URxvt*inputMethod:                    name
+! URxvt*preeditType:                    style
+! URxvt*imLocale:                       string
+! URxvt*imFont:                         fontname
+! URxvt*title:                          string
+! URxvt*iconName:                       string
+! URxvt*saveLines:                      number
+! URxvt*buffered:                       boolean
+! URxvt*depth:                          number
+! URxvt*visual:                         number
+! URxvt*transient-for:                  windowid
+! URxvt*override-redirect:              boolean
+! URxvt*hold:                           boolean
+! URxvt*externalBorder:                 number
+! URxvt*internalBorder:                 number
+! URxvt*borderLess:                     boolean
+! URxvt*lineSpace:                      number
+!! URxvt*letterSpace:                    0 
+! URxvt*skipBuiltinGlyphs:              boolean
+! URxvt*pointerBlankDelay:              number
+! URxvt*backspacekey:                   string
+! URxvt*deletekey:                      string
+! URxvt*print-pipe:                     string
+! URxvt*modifier:                       modifier
+! URxvt*cutchars:                       string
+! URxvt*answerbackString:               string
+! URxvt*secondaryScreen:                boolean
+! URxvt*secondaryScroll:                boolean
+! URxvt*perl-lib:                       string
+! URxvt*perl-eval:                      perl-eval
+! URxvt*perl-ext-common:                string
+! URxvt*perl-ext:                       string
+! URxvt*iso14755:                       boolean
+! URxvt*iso14755_52:                    boolean
+! URxvt*xrm:                            string
+! URxvt*keysym.sym:                     keysym
+! URxvt*background.border:              boolean
+! URxvt*background.expr:                string
+! URxvt*background.interval:            seconds
+! URxvt*bell-command:                   string
+! URxvt*kuake.hotkey:                   string
+! URxvt*matcher.button:                 string
+! URxvt*matcher.launcher:               string
+! URxvt*matcher.launcher.*:             string
+! URxvt*matcher.pattern.*:              string
+! URxvt*matcher.rend.*:                 string
+! URxvt*remote-clipboard.fetch:         string
+! URxvt*remote-clipboard.store:         string
+! URxvt*searchable-scrollback:          string
+! URxvt*selection-autotransform.*:      string
+! URxvt*selection-pastebin.cmd:         string
+! URxvt*selection-pastebin.url:         string
+! URxvt*selection.pattern-0:            string
+! URxvt*tab-bg:                         colour
+! URxvt*tab-fg:                         colour
+! URxvt*tabbar-bg:                      colour
+! URxvt*tabbar-fg:                      colour
+!! URxvt*url-launcher:                   firefox
+
+!! Disables keycap picture insert mode
+!! URxvt.iso14755: true
+!! URxvt.iso14755_52: false
+
+!! Font configuration options below
+
+!! Xft.autohint: 0
+!! Xft.lcdfilter:  lcddefault
+!! Xft.hintstyle:  hintslight
+!! Xft.hinting:1 
+!! Xft.antialias: 1
+!! Xft.rgba: rgb
+
+! End of file

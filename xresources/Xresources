@@ -1,17 +1,22 @@
 !.Xresources
 
-Xft.dpi:                        72
+! HiDPI Scaling
+Xft.dpi:                        138
+Xft.antialias:					1
+
+
+! URxvt settings
 URxvt*termName:                 rxvt-256color
 !URxvt*font:                     xft:Terminus (TTF):style=Medium:pixelsize=12
 !URxvt*font:                     xft:Hack:style=Medium:pixelsize=10
-URxvt*font:                     xft:SourceCodePro:style=Medium:pixelsize=11
+URxvt*font:                     xft:SourceCodePro:style=Medium:size=11
 URxvt.depth:                    32
-!!Doesn't work in vim or after I exit vim for some reason
+! Doesnt work in vim or after I exit vim for some reason
 !URxvt.cursorBlink:              true
 URxvt*lineSpace:                1
 URxvt.letterSpace:              0
 URxvt.iso14755:                 false
-URxvt.iso14755_52:              false
+URxvt.iso14755_52:				false
 URxvt*geometry:                 80x20
 URxvt.scrollBar:                false
 URxvt*loginShell:               true

@@ -288,10 +288,12 @@ super + {_,shift + }b
 # ---------------------------------------------------------------------------- #
 
 # Managed by power manager.
-#XF86MonBrightnessDown
+XF86MonBrightnessDown
+	~/Documents/Code/Bash/oled_brightness -0.1
 
 # Managed by power manager.
-#XF86MonBrightnessUp
+XF86MonBrightnessUp
+	~/Documents/Code/Bash/oled_brightness 0.1
 
 # Handle muting the audio.
 XF86AudioMute

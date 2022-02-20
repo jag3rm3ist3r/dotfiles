@@ -136,7 +136,7 @@ done
 bspc rule -a 'File-roller' state=floating                                      &
 bspc rule -a 'Nm-applet' layer=above                                           &
 bspc rule -a 'URxvt:urxvtq' state=floating sticky=on                           &
-#bspc rule -a 'Firefox:Navigator' -o state=fullscreen desktop=^2               &
+bspc rule -a 'Firefox:Navigator' -o state=fullscreen						   &
 bspc rule -a 'Firefox:Places' state=floating                                   &
 bspc rule -a 'Firefox:Browser' state=floating                                  &
 bspc rule -a 'Firefox:Toolkit' state=floating								   &

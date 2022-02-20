@@ -305,7 +305,7 @@ shift + XF86AudioMute
 
 # Handle volume controls.
 XF86Audio{Lower,Raise}Volume
-	amixer -D pulse sset Master 2%{-,+}
+	amixer sset Master 2%{-,+}
 # Turn volume buttons into media keys when shift is held.
 shift + XF86Audio{Lower,Raise}Volume
 	mpc {prev,next}
@@ -316,8 +316,8 @@ XF86Audio{Prev,Play,Next}
 # Holdover from Macbook Pro
 # XF86Display is used in the focus/swap section above.
 # Enable/Disable DVI-0 Monitor to the right of LVDS (Built in monitor)
-super + XF86Display
-	/home/jager/Documents/Code/Bash/monitor_enable DVI-0 right-of 0
+#super + XF86Display
+	#/home/jager/Documents/Code/Bash/monitor_enable DVI-0 right-of 0
 
 # Backlight control file: /sys/class/backlight/apple_backlight/brightness
 # Possible control file: /sys/class/leds/smc\:\:kbd_backlight/brightness

@@ -240,6 +240,8 @@ $HOME/.config/bspwm/restart_compton 0                                          &
 # ---------------------------------------------------------------------------- #
 #                      Late Start Non-Essential Processes                      #
 # ---------------------------------------------------------------------------- #
+# Make sure the screen sleeps after a while to prevent burn in.
+xset dpms 30																   &
 # Makes the default cursor the left pointer cursor instead of the X shaped one.
 xsetroot -cursor_name left_ptr                                                 &
 # Makes cursor disappear when idle.

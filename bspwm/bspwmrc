@@ -41,7 +41,7 @@ export XAUTHORITY='/home/jager/.Xauthority'
 # Start SXHKD keybinder.
 # -f: Motion event frequency setting.
 # Fixes some laggy movement with mouse controls.
-#sxhkd																		   &
+#sxhkd									       &
 
 # ============================================================================ #
 #                                 BSPWM Settings                               #
@@ -51,28 +51,10 @@ export XAUTHORITY='/home/jager/.Xauthority'
 # ---------------------------------------------------------------------------- #
 # The next few commands need to be run sequentially as the following commands
 #+rely on them.
-# Run pywal, sets wallpaper and matches themes to it, then generate steam theme
-#+based on wal theme. The grep is to prevent the escape characters wal creates
-#+being written to the log file.
-function source_colours(){
-	wal -Rq | grep -v '\e'
-	wal-steam -d | grep -i error
-	# Source the colors from Wal.
-	. "${HOME}/.cache/wal/colors.sh"
-	# Set the border colors based on Wal's colour selections.
-	# Color of the border of an unfocused window.
-	bspc config normal_border_color		"${color1}"
-	# Color of the border of a focused window of an unfocused monitor.
-	bspc config active_border_color		"${color2}"
-	# Color of the border of a focused window of a focused monitor.
-	bspc config focused_border_color	"${color15}"
-	# Color of the node --presel-{dir,ratio} message feedback area.
-	bspc config presel_feedback_color	"${color15}"
-}
-source_colours &
+~/Documents/Code/Bash/runWal
 # BSPWM settings
 # Window border width.
-bspc config border_width					  1								   &
+bspc config border_width		      1				       &
 # Size of the gap that separates windows.
 bspc config window_gap                        5                                &
 # Default split ratio.
@@ -187,7 +169,8 @@ bspc rule -a 'Pavucontrol' desktop=^10:primary								   &
 # Start compton compozitor.
 # Usage: $1 optional set inactive opacity ON:0/off:1.
 # Inactive opacity is set in: ~/.config/bspwm/restart_compton
-$HOME/.config/bspwm/restart_compton 0                                          &
+#$HOME/.config/bspwm/restart_compton 0                                          &
+# Temporarially disabled.
 
 # Start gnome settings daemon.
 # Applies GTK CSS settings and mouse settings.
@@ -229,19 +212,26 @@ $HOME/.config/bspwm/restart_compton 0                                          &
 
 # System menu applets.
 # Start custom system menu written in python.
-#${HOME}/Documents/Code/Python/SystemMenu.py								   &
+#${HOME}/Documents/Code/Python/SystemMenu.py				       &
 # Start NetworkManager applet.
-#nm-applet																	   &
+#nm-applet								       &
 
 # Put stalonetray on the right side of the screen in the middle.
 # There is a keybind for this now.
 #${HOME}/Documents/Code/Bash/toggle_stalonetray                                &
 
+# Dunst notification handler.
+dunst -conf ~/.config/dunst/dunstrc					       &
+
+# Touchegg gesture control enabler.
+touchegg --client							       &
+
+
 # ---------------------------------------------------------------------------- #
 #                      Late Start Non-Essential Processes                      #
 # ---------------------------------------------------------------------------- #
 # Make sure the screen sleeps after a while to prevent burn in.
-xset dpms 30																   &
+xset dpms 60																   &
 # Makes the default cursor the left pointer cursor instead of the X shaped one.
 xsetroot -cursor_name left_ptr                                                 &
 # Makes cursor disappear when idle.

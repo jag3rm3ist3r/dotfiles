@@ -14,10 +14,10 @@
 # Starts or restarts compton. Toggles inactive opactity on restart.
 #
 # Notes:
-#
+# I'm trying out picom in place of compton.
 #
 # Dependencies:
-# compton
+# compton (picom)
 #
 # ________________________________
 #
@@ -34,25 +34,28 @@ MENU_OPACITY="0.4"
 
 # save current compton process args for later
 # Don't change this to pgrep, it doesn't work.
-condition_test=$(ps -ef | grep -e "compton -i" | grep -v "grep" | wc -l)
+#condition_test=$(ps -ef | grep -e "picom -i" | grep -v "grep" | wc -l)
+condition_test=$(pgrep -a "picom" | grep -e "picom -i" | wc -l)
 [[ $# -gt 0 ]] && condition_test=$1
 
 # First, kill current compton instance
-pkill -x --signal 9 compton
+pkill -x --signal 9 picom
 # Check if compton process was having -i option
 # nohup is to detach compton process from the parent, run it as daemon
+sleep 0.1
 if [[ condition_test -gt 0 ]]; then
     # INACTIVE OPACTIY OFF
-    compton \
+    picom \
     --config "${COMPTON_CONFIG}" -b &
 else
-    compton \
+    picom \
     -i "${INACTIVE_OPACITY}" \
 	--active-opacity "${ACTIVE_OPACITY}" \
+	--inactive-opacity "${INACTIVE_OPACITY}" \
 	--menu-opacity "${MENU_OPACITY}" \
     --config "${COMPTON_CONFIG}" -b \
 	--blur-background \
-	--blur-method kawase --blur-strength 10 &
+	--blur-method dual_kawase --blur-strength 10 &
 fi
 
 exit 0

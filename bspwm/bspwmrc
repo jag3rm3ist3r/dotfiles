@@ -54,7 +54,7 @@ export XAUTHORITY='/home/jager/.Xauthority'
 ~/Documents/Code/Bash/runWal
 # BSPWM settings
 # Window border width.
-bspc config border_width		      1				       &
+bspc config border_width 1													   &
 # Size of the gap that separates windows.
 bspc config window_gap                        5                                &
 # Default split ratio.
@@ -118,7 +118,7 @@ done
 bspc rule -a 'File-roller' state=floating                                      &
 bspc rule -a 'Nm-applet' layer=above                                           &
 bspc rule -a 'URxvt:urxvtq' state=floating sticky=on                           &
-bspc rule -a 'Firefox:Navigator' -o state=fullscreen						   &
+#bspc rule -a 'Firefox:Navigator' -o state=fullscreen						   &
 bspc rule -a 'Firefox:Places' state=floating                                   &
 bspc rule -a 'Firefox:Browser' state=floating                                  &
 bspc rule -a 'Firefox:Toolkit' state=floating								   &
@@ -167,10 +167,11 @@ bspc rule -a 'Pavucontrol' desktop=^10:primary								   &
 #upstart --user                                                                &
 
 # Start compton compozitor.
+# Replaced with picom fork.
 # Usage: $1 optional set inactive opacity ON:0/off:1.
 # Inactive opacity is set in: ~/.config/bspwm/restart_compton
-#$HOME/.config/bspwm/restart_compton 0                                          &
-# Temporarially disabled.
+[[ $(cat /sys/class/power_supply/AC/online) -eq 1 ]] && \
+$HOME/.config/bspwm/restart_compton 0                                          &
 
 # Start gnome settings daemon.
 # Applies GTK CSS settings and mouse settings.
@@ -212,19 +213,20 @@ bspc rule -a 'Pavucontrol' desktop=^10:primary								   &
 
 # System menu applets.
 # Start custom system menu written in python.
-#${HOME}/Documents/Code/Python/SystemMenu.py				       &
+#${HOME}/Documents/Code/Python/SystemMenu.py								   &
 # Start NetworkManager applet.
-#nm-applet								       &
+#nm-applet																	   &
 
 # Put stalonetray on the right side of the screen in the middle.
 # There is a keybind for this now.
 #${HOME}/Documents/Code/Bash/toggle_stalonetray                                &
 
 # Dunst notification handler.
-dunst -conf ~/.config/dunst/dunstrc					       &
+dunst -conf ~/.config/dunst/dunstrc											   &
 
 # Touchegg gesture control enabler.
-touchegg --client							       &
+touchegg --daemon --quiet													   &
+touchegg --client															   &
 
 
 # ---------------------------------------------------------------------------- #
@@ -232,6 +234,8 @@ touchegg --client							       &
 # ---------------------------------------------------------------------------- #
 # Make sure the screen sleeps after a while to prevent burn in.
 xset dpms 60																   &
+# Turn tap to click on.
+xinput set-prop 13 354 0 0 0 0 1 3 2										   &
 # Makes the default cursor the left pointer cursor instead of the X shaped one.
 xsetroot -cursor_name left_ptr                                                 &
 # Makes cursor disappear when idle.

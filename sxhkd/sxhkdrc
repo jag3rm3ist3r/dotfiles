@@ -53,6 +53,10 @@ super + shift + space
 super + semicolon
 	/home/jager/Documents/Code/Bash/toggle_stalonetray
 
+# Show notification history
+super + Print
+	dunstctl history-pop
+
 # Lock and logout hotkeys
 # quit bspwm normally
 super + alt + shift + Escape
@@ -289,15 +293,16 @@ super + {_,shift + }b
 
 # Managed by power manager.
 XF86MonBrightnessDown
-	~/Documents/Code/Bash/oled_brightness -0.1
+	~/Documents/Code/Bash/oled_brightness -0.02
 
 # Managed by power manager.
 XF86MonBrightnessUp
-	~/Documents/Code/Bash/oled_brightness 0.1
+	~/Documents/Code/Bash/oled_brightness 0.02
 
 # Handle muting the audio.
 XF86AudioMute
-	~/Documents/Code/Bash/toggle_mute
+	~/Documents/Code/Bash/adjust_volume m
+	#~/Documents/Code/Bash/toggle_mute
 	#amixer -D pulse sset Master toggle
 # Turn mute button into a play/pause button when shift is held.
 shift + XF86AudioMute
@@ -305,13 +310,14 @@ shift + XF86AudioMute
 
 # Handle volume controls.
 XF86Audio{Lower,Raise}Volume
-	amixer sset Master 2%{-,+}
+	~/Documents/Code/Bash/adjust_volume {-,+}
+	
 # Turn volume buttons into media keys when shift is held.
 shift + XF86Audio{Lower,Raise}Volume
 	mpc {prev,next}
 # Handle Prev/Play/Next buttons.
-XF86Audio{Prev,Play,Next}
-	mpc {prev,toggle,next}
+#XF86Audio{Prev,Play,Next}
+	#mpc {prev,toggle,next}
 
 # Holdover from Macbook Pro
 # XF86Display is used in the focus/swap section above.
@@ -321,7 +327,6 @@ XF86Audio{Prev,Play,Next}
 
 # Backlight control file: /sys/class/backlight/apple_backlight/brightness
 # Possible control file: /sys/class/leds/smc\:\:kbd_backlight/brightness
-#super + XF86KbdLightOnOff
 super + F8
 	/home/jager/.config/bspwm/restart_compton
 
@@ -331,6 +336,7 @@ super + F8
 # Used by power manager
 #XF86KbdBrightnessUp
 
+# Remember DVD drives?
 # Defaults to the DVD drive.
 XF86Eject
 	eject

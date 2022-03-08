@@ -1,0 +1,20 @@
+@-moz-document url-prefix(about:reader){
+	body.dark {
+		color: #dddddd !important;
+		background-color: #000000 !important;
+	}
+}
+
+@-moz-document url("about:blank") {
+	* {
+		background-color: #000000;
+		/*
+		background: url('[INSERT IMAGE URL HERE]');
+		background-position:center center;
+		background-attachment:fixed;
+		background-repeat:no-repeat;
+		*/
+	}
+}
+
+

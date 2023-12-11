@@ -2,6 +2,7 @@
 
 ! HiDPI Scaling
 Xft.dpi:                        138
+!Xft.dpi:						72
 Xft.antialias:					1
 
 

@@ -30,8 +30,11 @@ super + {_,shift + }Return
 # Create custom sized terminal by dragging box.
 super + control + Return
 	/home/jager/Documents/Code/Bash/DrawingTerminals_by-f0x52
-button9
-	/home/jager/Documents/Code/Bash/DrawingTerminals_by-f0x52
+#button9
+	#/home/jager/Documents/Code/Bash/DrawingTerminals_by-f0x52
+{_,shift + }button{8,9}
+	bspc {desktop -f,node -d} {prev,next}
+	
 
 # Quake style terminal.
 control + Escape

@@ -78,7 +78,7 @@ corner-radius = 25.0;
 round-borders = 1;
 rounded-corners-exclude = [
   "! name~=''",
-  "name *= 'urxvtq'",
+  "name *= 'urxvtq'"
   #"class_g = 'Firefox'",
   #"name = 'Notification'"
   #"window_type = 'normal'"
@@ -137,8 +137,15 @@ focus-exclude = [
 
 
 opacity-rule = [
+	"100:class_g = 'URxvt'",
+	"100:class_g = 'Atom'",
+	"100:class_g = 'firefox-default'",
 	"100:class_g = 'Firefox'",
-	"50:name = 'Dunst'"
+	"100:class_g = 'MuPDF'",
+	"50:name = 'Dunst'",
+	"100:class_g = 'Gimp'",
+	"100:class_g = 'Chromium'",
+	"100:class_g = 'feh'"
 ];
 
 

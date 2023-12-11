@@ -8,7 +8,7 @@
 # Usage:
 # restart_compton
 # restart_compton [0|1]
-# (0:Inactive Opacity On | 1:Inactive Opacity Off)
+# (0:Transparency On | 1:Transparency Off)
 #
 # Description:
 # Starts or restarts compton. Toggles inactive opactity on restart.
@@ -22,9 +22,6 @@
 # ________________________________
 #
 
-# Usage:
-# restart_compton
-# restart_compton $1:'toggle inactive opacity'
 
 # const
 COMPTON_CONFIG="/home/jager/.config/bspwm/compton_config"
@@ -35,7 +32,8 @@ MENU_OPACITY="0.4"
 # save current compton process args for later
 # Don't change this to pgrep, it doesn't work.
 #condition_test=$(ps -ef | grep -e "picom -i" | grep -v "grep" | wc -l)
-condition_test=$(pgrep -a "picom" | grep -e "picom -i" | wc -l)
+#condition_test=$(pgrep -a "picom" | grep -e "picom -i" | wc -l)
+condition_test=$(pgrep -a "picom" | wc -l)
 [[ $# -gt 0 ]] && condition_test=$1
 
 # First, kill current compton instance
@@ -43,19 +41,22 @@ pkill -x --signal 9 picom
 # Check if compton process was having -i option
 # nohup is to detach compton process from the parent, run it as daemon
 sleep 0.1
-if [[ condition_test -gt 0 ]]; then
+#if [[ condition_test -gt 0 ]]; then
+if [[ condition_test -eq 0 ]]; then
     # INACTIVE OPACTIY OFF
-    picom \
-    --config "${COMPTON_CONFIG}" -b &
-else
+	#wal -i $(cat ~/.cache/wal/wal) -nqa 100 -b 000000
+    #picom \
+    #--config "${COMPTON_CONFIG}" -b &
+#else
+	#wal -i $(cat ~/.cache/wal/wal) -nqa 60 -b 000000
     picom \
     -i "${INACTIVE_OPACITY}" \
 	--active-opacity "${ACTIVE_OPACITY}" \
 	--inactive-opacity "${INACTIVE_OPACITY}" \
 	--menu-opacity "${MENU_OPACITY}" \
     --config "${COMPTON_CONFIG}" -b \
-	--blur-background \
-	--blur-method dual_kawase --blur-strength 10 &
+	--blur-background --no-ewmh-fullscreen \
+	--blur-method dual_kawase --blur-strength 7 &
 fi
 
 exit 0

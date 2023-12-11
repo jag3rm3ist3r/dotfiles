@@ -36,8 +36,8 @@ endfunction
 "! Using plug
 "Plug 'dylanaraps/wal.vim'
 "
-"colorscheme wal
-colorscheme elflord
+colorscheme wal
+"colorscheme elflord
 
 syntax on
 set number
